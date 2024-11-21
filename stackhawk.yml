@@ -6,10 +6,20 @@ app:
 hawk:
   spider:
     base: true
-    maxDurationMinutes: 10
+    maxDurationMinutes: 15
     include:
-      - http://localhost:8000/api/vulnerable-sql?id=1
+      - http://127.0.0.1:8000/api/vulnerable-sql?id=1
+      - http://127.0.0.1:8000/api/vulnerable-xss
+      - http://127.0.0.1:8000/api/vulnerable-upload
   scan:
     openapi: false
+    fuzzing:
+      enabled: true
+      config:
+        payloads:
+          - sql_injection
+          - xss
+          - directory_traversal
+
     spider:
-      maxDepth: 5
+      maxDepth: 10
